@@ -1,3 +1,5 @@
+# runs a variety of tests for the game
+
 import unittest
 from unittest.mock import patch, mock_open
 from game import is_int

@@ -1,3 +1,5 @@
+# manages game statistics
+
 import os
 import inquirer
 

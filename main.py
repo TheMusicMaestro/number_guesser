@@ -1,3 +1,5 @@
+# used to boot up the game
+
 import inquirer #allows for user input multi-selec
 from game import play_game
 from stats import view_stats, reset_stats

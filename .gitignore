@@ -1,5 +1,7 @@
+# python cache files
 __pycache__/
 *.pyc
 
+# local game data files
 record.txt
 history.txt

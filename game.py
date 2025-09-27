@@ -1,3 +1,5 @@
+# runs the game itself
+
 import random
 
 
