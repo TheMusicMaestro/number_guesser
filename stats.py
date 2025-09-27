@@ -5,15 +5,16 @@ import inquirer
 def view_stats():
     """Displays the game statistics."""
 
-    print("\n--- Game Statistics ---")
+    print("\n------ Game Statistics ------")
 
+    # print record.txt
     try:
         with open("record.txt", "r") as f:
-            record = f.read()
-            print(f"Record Lowest Guess: {record}")
+            print(f"Record Lowest Guess: {f.read()}")
     except FileNotFoundError:
         print("No record set yet.")
 
+    # print history.txt
     try:
         with open("history.txt", "r") as f:
             history = [int(line.strip()) for line in f.readlines()]
@@ -26,7 +27,7 @@ def view_stats():
                 print("No games played yet.")
     except FileNotFoundError:
         print("No games played yet.")
-    print("-----------------------\n")
+    print("-----------------------------\n")
 
 
 def reset_stats():
@@ -36,17 +37,24 @@ def reset_stats():
         "Are you sure you want to reset all stats? This cannot be undone.",
         default=False,
     )
+    
     if confirm:
+        
+        # remove record.txt
         try:
             os.remove("record.txt")
             print("Record file reset.")
         except FileNotFoundError:
             print("Record file already empty.")
+        
+        # remove history.txt
         try:
             os.remove("history.txt")
             print("History file reset.")
         except FileNotFoundError:
             print("History file already empty.")
+        
         print("Stats have been reset.\n")
+        
     else:
         print("Stats reset cancelled.\n")

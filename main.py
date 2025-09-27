@@ -1,7 +1,4 @@
-# this is a number guesser game :)
-# run this game in the command line using: .venv/bin/python3 main.py
-
-import inquirer
+import inquirer #allows for user input multi-selec
 from game import play_game
 from stats import view_stats, reset_stats
 
@@ -13,7 +10,7 @@ def main():
         questions = [
             inquirer.List(
                 "choice",
-                message="What would you like to do?",
+                message="Select an option:",
                 choices=["Play Game", "View Stats", "Reset Stats", "Quit"],
             ),
         ]
@@ -26,7 +23,7 @@ def main():
         elif answers["choice"] == "Reset Stats":
             reset_stats()
         elif answers["choice"] == "Quit":
-            print("Goodbye!")
+            print("Goodbye!\n")
             break
 
 
