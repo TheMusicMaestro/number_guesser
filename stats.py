@@ -3,6 +3,11 @@
 import os
 import inquirer
 
+def no_record():
+    print("No record set yet.")
+    
+def no_games():
+    print("No games played yet.")
 
 def view_stats():
     """Displays the game statistics."""
@@ -12,9 +17,17 @@ def view_stats():
     # print record.txt
     try:
         with open("record.txt", "r") as f:
-            print(f"Record Lowest Guess: {f.read()}")
+            lines = f.readlines()
+            if len(lines) == 2:
+                record_holder = lines[0].strip()
+                record_lowest_guess = lines[1].strip()
+                print(
+                    f"Record Lowest Guess: {record_lowest_guess} — Held by {record_holder}"
+                )
+            else:
+                no_record()
     except FileNotFoundError:
-        print("No record set yet.")
+        no_record()
 
     # print history.txt
     try:
@@ -26,9 +39,10 @@ def view_stats():
                 print(f"Total Number of Games Played: {num_games}")
                 print(f"Average Number of Guesses per Game: {average_guesses:.2f}")
             else:
-                print("No games played yet.")
+                no_games()
     except FileNotFoundError:
-        print("No games played yet.")
+        no_games()
+    
     print("-----------------------------\n")
 
 
@@ -39,16 +53,15 @@ def reset_stats():
         "Are you sure you want to reset all stats? This cannot be undone.",
         default=False,
     )
-    
+
     if confirm:
-        
         # remove record.txt
         try:
             os.remove("record.txt")
             print("Record file reset.")
         except FileNotFoundError:
             print("Record file already empty.")
-        
+
         # remove history.txt
         try:
             os.remove("history.txt")
@@ -56,7 +69,8 @@ def reset_stats():
         except FileNotFoundError:
             print("History file already empty.")
         
-        print("Stats have been reset.\n")
-        
+        print()
+            
+
     else:
         print("Stats reset cancelled.\n")

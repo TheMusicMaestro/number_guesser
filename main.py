@@ -1,6 +1,8 @@
 # used to boot up the game
 
-import inquirer #allows for user input multi-selec
+# this tool allows for user input via a multi-select menu
+import inquirer
+
 from game import play_game
 from stats import view_stats, reset_stats
 
@@ -12,19 +14,19 @@ def main():
         questions = [
             inquirer.List(
                 "choice",
-                message="Select an option:",
+                message="Select an option",
                 choices=["Play Game", "View Stats", "Reset Stats", "Quit"],
             ),
         ]
-        answers = inquirer.prompt(questions)
+        answer = inquirer.prompt(questions)
 
-        if answers["choice"] == "Play Game":
+        if answer["choice"] == "Play Game":
             play_game()
-        elif answers["choice"] == "View Stats":
+        elif answer["choice"] == "View Stats":
             view_stats()
-        elif answers["choice"] == "Reset Stats":
+        elif answer["choice"] == "Reset Stats":
             reset_stats()
-        elif answers["choice"] == "Quit":
+        elif answer["choice"] == "Quit":
             print("Goodbye!\n")
             break
 

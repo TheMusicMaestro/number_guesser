@@ -22,12 +22,15 @@ def play_game():
     """The main game logic."""
     try:
         with open("record.txt", "r") as f:
-            read_value = float(f.read())
-            if read_value == float("inf"):
-                record_lowest_guess = float("inf")
+            lines = f.readlines()
+            if len(lines) >= 2:
+                record_holder = lines[0].strip()
+                record_lowest_guess = int(lines[1].strip())
             else:
-                record_lowest_guess = int(read_value)
+                record_holder = "No one"
+                record_lowest_guess = float("inf")
     except (FileNotFoundError, ValueError):
+        record_holder = "No one"
         record_lowest_guess = float("inf")
 
     # variable assignments
@@ -91,11 +94,12 @@ def play_game():
 
             # print new record
             if num_guesses < record_lowest_guess:
-                record_lowest_guess = num_guesses
-                with open("record.txt", "w") as f:
-                    f.write(str(record_lowest_guess))
                 print("NEW RECORD!")
-                print("Congratulations, you now hold the top spot!")
+                record_lowest_guess = num_guesses
+                record_holder = input("Enter your name: ")
+                with open("record.txt", "w") as f:
+                    f.write(str(record_holder) + "\n")
+                    f.write(str(record_lowest_guess) + "\n")
 
             with open("history.txt", "a") as f:
                 f.write(str(num_guesses) + "\n")
